@@ -42,9 +42,9 @@ const Navbar = async () => {
 
     return (
         <aside className="hidden sm:flex h-screen min-w-[200px] py-10 px-4 bg-zinc-950 flex-col text-zinc-50 text-sm gap-2 border-r-zinc-500/10 border-r font-medium">
-            {mainRoutes.map((route) => {
+            {mainRoutes.map((route,index) => {
                 return (
-                    <NavLink path={route.path}>
+                    <NavLink path={route.path} key={index}>
                         {route.icon}
                         {route.name}
                     </NavLink>
