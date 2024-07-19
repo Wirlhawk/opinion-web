@@ -1,7 +1,3 @@
-// import '@fortawesome/fontawesome-svg-core/style.css'
-// import { config } from "@fortawesome/fontawesome-svg-core"
-// config.autoAddCss = false
-
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from './navbar';
@@ -16,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex bg-zinc-900`}>
+      <body className={`${inter.className} flex flex-col bg-background px-[6rem] gap-10`}>
         <Navbar />
         {children}
       </body>

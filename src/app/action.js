@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
+import prisma  from "@/lib/db"
 
 export async function addPost(formData) {
     const {getUser} = getKindeServerSession();
