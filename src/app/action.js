@@ -124,7 +124,7 @@ export const editProfile = async (formData) => {
             },
         });
 
-        await revalidatePath('/post');
+        revalidatePath('/post');
 
         return updatedUser;
     } catch (error) {
