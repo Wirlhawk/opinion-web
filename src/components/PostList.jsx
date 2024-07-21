@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getPost } from "@/app/action";
 import { formatDistanceToNow } from "date-fns";
 
 const formatRelativeTime = (isoDateString) => {
@@ -9,10 +8,8 @@ const formatRelativeTime = (isoDateString) => {
     return formatDistanceToNow(date, { addSuffix: true });
 };
 
-export default async function PostList() {
-    const posts = await getPost()
-    
-    return (
+export default async function PostList({posts}) {
+        return (
         <div className="grid grid-cols-2 gap-10">
             {posts.map((post) => (
                 <Link href={`/post/${post.id} `} key={post.id}>

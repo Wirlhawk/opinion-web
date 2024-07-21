@@ -4,7 +4,7 @@ import CreateNewPost from "@/components/CreateNewPost";
   
 export default async function Home() {
     const session = await getServerSession(authOptions)
-    console.log("serveer session",session)
+    
 
     return (
         <main className="w-full  text-text flex flex-col gap-10">
