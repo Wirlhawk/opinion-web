@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { editProfile } from "@/app/action"
+import SubmitBtn from "@/components/submit-btn"
 
 const EditProfilePage = () => {
 
@@ -35,7 +36,7 @@ const EditProfilePage = () => {
                     />
                 </div>
 
-                <Button className="rounded-xl">Save Changes</Button>
+                <SubmitBtn>Save Changes</SubmitBtn>
             </form>
         </main>
     );

@@ -7,6 +7,7 @@ import { redirect } from "next/dist/server/api-utils";
 import { put } from "@vercel/blob";
 
 
+
 export async function addPost(formData) {
     const session = await getServerSession(authOptions);
     const { user } = session
@@ -122,6 +123,8 @@ export const editProfile = async (formData) => {
                 picture: imageUrl || undefined,
             },
         });
+
+        await revalidatePath('/post');
 
         return updatedUser;
     } catch (error) {
