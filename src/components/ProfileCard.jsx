@@ -8,25 +8,30 @@ import Link from "next/link";
 
 
 
-const ProfileCard = ({user,postsCount}) => {
+const ProfileCard = ({user,postsCount,sessionUsername}) => {
     const formattedDate = format(new Date(user.createdAt), "'Joined on' do 'of' MMMM yyyy");
+    const isOwner = ( user.username === sessionUsername ? true : false)
+
     return (
         <div className="flex w-full">
             <div className="flex flex-col gap-10 w-full">
                 {/* username and avatar */}
-                <div className="flex gap-6 items-center w-full">
+                <div className="flex flex-wrap gap-6 items-center w-full">
                     <Avatar className="w-[6rem] h-[6rem] border border-muted font-md">
                         <AvatarImage src={user.picture} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <h1 className="text-4xl font-bold">@{user.username}</h1>
 
-                    <span className="ml-auto mr-12 flex gap-2">
-                        <Button asChild>
-                            <Link href="/profile/edit">Edit Profile</Link>
-                        </Button>
-                        <LogoutBtn variant="outline" />
-                    </span>
+                    { isOwner && (
+                        <span className="sm:ml-auto mr-12 flex gap-2">
+                            <Button asChild>
+                                <Link href="/profile/edit">Edit Profile</Link>
+                            </Button>
+                            <LogoutBtn variant="outline" />
+                        </span>
+                    )}
+
                 </div>
                 {/* bio and misc */}
                 <div className="flex flex-col">

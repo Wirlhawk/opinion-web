@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
             <Provider>
                 <body
-                    className={`${inter.className} flex flex-col bg-background px-[6rem] gap-10`}
+                    className={`${inter.className} flex flex-col bg-background px-[2rem] sm:px-[6rem] gap-10`}
                 >   
                     <Navbar />
                     {children}

@@ -66,7 +66,7 @@ export async function register(formData) {
     });
 
     if (userExist) {
-        return { error: "User already exists" };
+        return { message: "User already exists" };
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -77,8 +77,8 @@ export async function register(formData) {
         },
     });
 
-    // Optionally log the user in after registration
-    await login(formData);
+    return {message:"Account Has been Created"}
+
 }
 
 export async function logout() {

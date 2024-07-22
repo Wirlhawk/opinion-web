@@ -6,8 +6,6 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/dist/server/api-utils";
 import { put } from "@vercel/blob";
 
-
-
 export async function addPost(formData) {
     const session = await getServerSession(authOptions);
     const { user } = session
@@ -68,46 +66,14 @@ export async function getPostByUser(username) {
     return posts;
 }
 
-// export const editProfile = async (formData) => {
-//     const session = await getServerSession(authOptions);
-//     const { user } = session
-
-//     const image = formData.get("image")
-//     const bio = formData.get("bio")
-
-//     const blob = uploadImage(image)
-    
-//     console.log(blob)
-
-//     await prisma.user.update({
-//       where: { id: user.id },
-//       data: {
-//         bio: bio || undefined, 
-//         picture: blob.url || undefined, 
-//       },
-//     });
-// }
-
-// export async function uploadImage(imageFile) {
-//     const blob = await put("random", imageFile, {
-//         access: "public",
-//     });
-//     revalidatePath("/");
-//     console.log("blob :",blob);
-
-//     return blob;
-// }
-
-
 export const editProfile = async (formData) => {
     try {
         const session = await getServerSession(authOptions);
         const user = session.user;
-
         const image = formData.get("picture");
         const bio = formData.get("bio");
+        const data = {}
 
-        console.log("Received image:", image); // Log the image file to ensure it’s received
 
         let imageUrl = null;
         if (image) {
@@ -115,13 +81,18 @@ export const editProfile = async (formData) => {
             console.log("Blob from uploadImage:", blob); // Ensure this log appears
             imageUrl = blob.url;
         }
+        
+        if (bio) {
+            data.bio = bio;
+        }
+
+        if (imageUrl) {
+            data.picture = imageUrl;
+        }
 
         const updatedUser = await prisma.user.update({
             where: { id: user.id },
-            data: {
-                bio: bio || undefined,
-                picture: imageUrl || undefined,
-            },
+            data: data,
         });
 
         revalidatePath('/post');

@@ -15,7 +15,7 @@ const CreateNewPost = () => {
                     }}
             >
                 <div className="w-full flex gap-5">
-                    <Avatar className="w-16 h-16 border border-muted font-md">
+                    <Avatar className="w-12 h-12 sm:w-16 sm:h-16 border border-muted font-md">
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>

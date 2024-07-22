@@ -1,5 +1,4 @@
 import { register } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -11,8 +10,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link"
 
-export default function LoginForm() {
+export default function RegisterPage() {
     return (
         <form
             className="w-flex grid place-items-center h-screen"
@@ -51,12 +51,21 @@ export default function LoginForm() {
                             placeholder="password"
                         />
                     </div>
+                    
+                    <span className="flex gap-2">
+                        <h1 className="text-sm text-muted"> Already Have an Account?</h1>
+                        <Link className="text-sm" href="/login">Log in</Link>
+                    </span>
+                    
+                    
                 </CardContent>
+
                 <CardFooter>
                     <Button className="w-full" type="submit">
                         Sign in
                     </Button>
                 </CardFooter>
+                
             </Card>
         </form>
     );

@@ -20,10 +20,12 @@ const PostDetail = ({post}) => {
               </Avatar>
               <span>
                   <h1 className="text-2xl font-bold">@{post.user.username}</h1>
-                  <h2 className="text-md text-muted ">{post.user.bio || "no bio"}</h2>
+                  <h2 className="text-md text-muted ">
+                      {post.user.bio || "no bio"}
+                  </h2>
               </span>
           </div>
-          <p className="text-xl">{post.body}</p>
+          <p className="text-xl break-words">{post.body}</p>
           <span className="text-md text-muted ">
               {formatDate(post.createdAt)}
           </span>
