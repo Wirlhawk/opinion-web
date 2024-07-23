@@ -9,9 +9,11 @@ const formatDate = (isoDateString) => {
 };
 
 const PostDetail = ({post}) => {
+
+    // bg-secondary p-10 border border-muted
   return (
       <div
-          className="flex flex-col  gap-4 sm:gap-10 bg-secondary p-10 rounded-3xl border border-muted w-full mb-10"
+          className="flex flex-col  gap-5 sm:gap-10  rounded-3xl w-full mb-10"
           key={post.id}
       >
           <div className="flex items-center gap-5">
