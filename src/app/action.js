@@ -62,17 +62,20 @@ export async function getPostById(id) {
 export async function getPostByUser(username) {
     const user = await prisma.user.findMany({
         where: {
-            username
+            username,
         },
         include: {
-            posts: true,
+            posts: {
+                orderBy: {
+                    createdAt: "desc", 
+                },
+            },
         },
-        orderBy: {
-            createdAt: "desc", // Order posts by the latest first
-        },
+
     });
     return user;
 }
+
 
 export const editProfile = async (formData) => {
     try {

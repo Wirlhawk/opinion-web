@@ -8,9 +8,9 @@ const formatRelativeTime = (isoDateString) => {
     return formatDistanceToNow(date, { addSuffix: true });
 };
 //grid grid-cols-2
-export default async function PostList({posts,user,...props}) {
+export default async function PostList({ posts, user }) {
         return (
-            <div className="flex flex-wrap gap-10 pb-10 " {...props}>
+            <div className="flex flex-wrap gap-10 pb-10 ">
                 {posts.map((post) => (
                     <div
                         key={post.id}

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { addPost } from '@/app/action'
 import SubmitBtn from './submit-btn';
@@ -9,8 +9,10 @@ import { useSession } from 'next-auth/react';
 
 
 const CreateNewPost = () => {
+    const imageInputRef = useRef(null);
     const { data:session } = useSession()
     const [picturePreview, setPicturePreview] = useState(null);
+
     const handlePictureChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -22,7 +24,10 @@ const CreateNewPost = () => {
     };
 
     const removePicture = () => {
-        setPicturePreview(null);
+        if (imageInputRef.current) {
+            imageInputRef.current.value = '';
+            setPicturePreview(null);
+        }
     }
 
     return (
@@ -53,6 +58,7 @@ const CreateNewPost = () => {
                                 className="hidden"
                                 onChange={handlePictureChange}
                                 name="picture"
+                                ref={imageInputRef}
                             />
                             
                             {picturePreview && (

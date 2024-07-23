@@ -36,7 +36,7 @@ const ProfilePage = async ({params}) => {
             <PostList
                 posts={posts}
                 user={user[0]}
-                className="flex-col-reverse flex flex-wrap gap-10 pb-10 "
+                
             />
         </main>
     );

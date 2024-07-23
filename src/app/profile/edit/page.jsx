@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; //
 
 const EditProfilePage = () => {
 
+
     const [picturePreview, setPicturePreview] = useState(null);
     const handlePictureChange = (e) => {
         const file = e.target.files[0];
