@@ -14,18 +14,30 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const ProfilePage = async ({params}) => {
-    const posts = await getPostByUser(params.username)
-    const postsCount = posts.length
-    const { user } = posts[0]
     const session = await getServerSession(authOptions);
 
+    const user = await getPostByUser(params.username)
+    const { posts } = user[0]
+    const postsCount = posts.length
+
     return (
+        // <h1>tes</h1>
         <main className="w-full text-text flex flex-col gap-10">
             {/* Profile Card */}
-            <ProfileCard user={user} postsCount={postsCount} sessionUsername={session.user.username}/>
+            <ProfileCard
+                user={user[0]}
+                postsCount={postsCount}
+                sessionUsername={session.user.username}
+            />
 
-            <h1 className="text-2xl">All Post</h1>
-            <PostList posts={posts}/>
+            <h1 className="text-2xl">
+                {postsCount > 1 ? "All Post" : "No Post"}
+            </h1>
+            <PostList
+                posts={posts}
+                user={user[0]}
+                className="flex-col-reverse flex flex-wrap gap-10 pb-10 "
+            />
         </main>
     );
 }

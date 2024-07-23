@@ -7,7 +7,7 @@ export default async function Home() {
     
 
     return (
-        <main className="w-full  text-text flex flex-col gap-10">
+        <main className="w-full text-text flex flex-col gap-10 pb-10">
             <header>
                 <h1 className="text-5xl font-bold">
                     Hello! @{session?.user?.username}

@@ -42,14 +42,18 @@ const Navbar = () => {
 
     return (
         <nav className="bg-secondary h-[5rem] px-10 flex border border-muted rounded-3xl mt-10 items-center justify-between">
-            <h1 className="font-bold text-text text-lg hidden sm:block">Opinion</h1>
+            <h1 className="font-bold text-text text-lg hidden sm:block">
+                Opinion
+            </h1>
 
-            <div className="flex items-center gap-5">
+            {/* width: 100%;
+    justify-content: space-between; */}
+            <div className="flex items-center gap-5 w-full justify-between sm:w-auto sm:justify-auto">
                 {mainRoutes.map((route, index) => (
                     <NavLink path={route.path} key={index}>
                         {route.icon}
                     </NavLink>
-                ))}                
+                ))}
             </div>
         </nav>
     );

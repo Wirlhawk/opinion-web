@@ -23,7 +23,7 @@ const EditProfilePage = () => {
     return (
         <main className="w-full text-text flex flex-col gap-10">
             <form
-                className="flex flex-col gap-10 bg-secondary p-10 rounded-3xl border border-muted w-1/2"
+                className="flex flex-col gap-10 bg-secondary p-10 rounded-3xl border border-muted w-full sm:min-w-[400px]"
                 action={editProfile}
             >
                 <h1 className="text-2xl font-bold ">Edit Profile</h1>

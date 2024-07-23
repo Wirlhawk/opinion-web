@@ -9,7 +9,7 @@ export default function NavLink({children,path}) {
     return (
         <Link
             href={`${path}`}
-            className={` hover:bg-muted rounded-xl transition p-3 ${
+            className={` sm:hover:bg-muted rounded-xl transition p-3 ${
                 pathName === path ? "bg-muted " : ""
             }`}
         >

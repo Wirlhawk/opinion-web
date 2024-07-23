@@ -9,15 +9,25 @@ import { put } from "@vercel/blob";
 export async function addPost(formData) {
     const session = await getServerSession(authOptions);
     const { user } = session
+    const body = formData.get("body")
+    const image = formData.get("picture")
+    let imageUrl = null;
 
     if (formData.get("body") == "") {
         return null
+    }
+
+    if (image.size > 0) {
+        const blob = await uploadImage(image);
+        console.log("Blob from uploadImage:", blob); 
+        imageUrl = blob.url;
     }
 
     await prisma.post.create({
         data: {
             userId: user.id,
             body: formData.get("body"),
+            picture: imageUrl || null
         },
     });
 
@@ -50,20 +60,18 @@ export async function getPostById(id) {
 }
 
 export async function getPostByUser(username) {
-    const posts = await prisma.post.findMany({
+    const user = await prisma.user.findMany({
         where: {
-            user: {
-                username: username,
-            },
+            username
         },
         include: {
-            user: true,
+            posts: true,
         },
         orderBy: {
             createdAt: "desc", // Order posts by the latest first
         },
     });
-    return posts;
+    return user;
 }
 
 export const editProfile = async (formData) => {
