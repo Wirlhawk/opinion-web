@@ -31,7 +31,7 @@ const ProfilePage = async ({params}) => {
             />
 
             <h1 className="text-2xl">
-                {postsCount > 1 ? "All Post" : "No Post"}
+                {postsCount > 0 ? "All Post" : "No Post"}
             </h1>
             <PostList
                 posts={posts}
