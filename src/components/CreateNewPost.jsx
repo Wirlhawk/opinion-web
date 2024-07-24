@@ -1,11 +1,10 @@
 "use client"
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { addPost } from '@/app/action'
 import SubmitBtn from './submit-btn';
 import { ImagePlus, X } from "lucide-react";
 import { useSession } from 'next-auth/react';
-
 
 
 const CreateNewPost = () => {
@@ -30,8 +29,10 @@ const CreateNewPost = () => {
         }
     }
 
+    
+
     return (
-        <div className="max-w-3xl bg-secondary border rounded-3xl p-10 ">
+        <div className="max-w-3xl bg-secondary border rounded-2xl p-10 ">
             <form className="w-full " action={addPost}>
                 <div className="w-full flex gap-5">
                     <Avatar className="w-12 h-12 sm:w-16 sm:h-16 border border-muted font-md">

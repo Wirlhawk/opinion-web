@@ -14,7 +14,7 @@ export default async function PostList({ posts, user }) {
                 {posts.map((post) => (
                     <div
                         key={post.id}
-                        className=" flex-1 gap-5 w-full sm:min-w-[400px] bg-secondary p-10 rounded-3xl border border-muted sm:hover:bg-muted transition"
+                        className=" flex-1 gap-5 w-full sm:min-w-[400px] bg-secondary p-10 rounded-2xl border border-muted sm:hover:bg-muted transition"
                     >
                         <Link href={`/post/${post.id} `} className="flex flex-col gap-5 h-full">
                             

@@ -13,8 +13,8 @@ export async function addPost(formData) {
     const image = formData.get("picture")
     let imageUrl = null;
 
-    if (formData.get("body") == "") {
-        return null
+    if (body == "") {
+        return { success: false, message: "Post cannot be empty" };
     }
 
     if (image.size > 0) {
@@ -32,7 +32,7 @@ export async function addPost(formData) {
     });
 
     revalidatePath("/post")
-    return { succsess:true }
+    return { success: true, message: 'Post Has Been Created' };
 };
 
 export async function getPost() {
@@ -48,15 +48,32 @@ export async function getPost() {
 }
 
 export async function getPostById(id) {
-    const posts = await prisma.post.findUnique({
-        where: {
-            id,
-        },
+    const post = await prisma.post.findUnique({
+    where: { 
+        id: id 
+    },
+    include: {
+      comments: {
         include: {
-            user: true,
+          user: {
+            select: {
+              id: true,
+              username: true,
+              picture: true,
+            },
+          },
         },
-    });
-    return posts;
+      },
+      user: {
+        select: {
+          id: true,
+          username: true,
+          picture: true,
+        },
+      },
+    },
+  });
+    return post;
 }
 
 export async function getPostByUser(username) {
@@ -76,6 +93,23 @@ export async function getPostByUser(username) {
     return user;
 }
 
+export async function addComment(formData,postId) {
+    const session = await getServerSession(authOptions);
+    const { user } = session
+    const userId = user.id
+    const body = formData.get("body");
+
+    await prisma.comment.create({
+        data: {
+            body: body,
+            postId: postId,
+            userId: userId
+        },
+    });
+
+    revalidatePath(`/post/${postId}`);
+    return { succsess: true };
+}
 
 export const editProfile = async (formData) => {
     try {

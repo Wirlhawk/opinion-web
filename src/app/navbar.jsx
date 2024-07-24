@@ -41,7 +41,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-secondary h-[5rem] px-10 flex border border-muted rounded-3xl mt-10 items-center justify-between">
+        <nav className="bg-secondary h-[5rem] px-10 flex border border-muted rounded-2xl mt-10 items-center justify-between">
             <h1 className="font-bold text-text text-lg hidden sm:block">
                 Opinion
             </h1>
