@@ -1,3 +1,4 @@
+"use client"
 import { register } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,14 +12,28 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link"
+import { useState } from "react";
+
+
 
 export default function RegisterPage() {
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState(false)
+
     return (
         <form
             className="w-flex grid place-items-center h-screen"
-            action={async (formData) => {
-                "use server";
-                await register(formData);
+            action={async (FormData) => {
+                const result = await register(FormData);
+
+                setError("");
+                setSuccess(false);
+
+                if (result?.error) {
+                    setError(result.error);
+                } else {
+                    setSuccess(true);
+                }
             }}
         >
             <Card className="w-full max-w-sm bg-background">
@@ -51,13 +66,24 @@ export default function RegisterPage() {
                             placeholder="password"
                         />
                     </div>
-                    
+
                     <span className="flex gap-2">
-                        <h1 className="text-sm text-muted"> Already Have an Account?</h1>
-                        <Link className="text-sm" href="/login">Log in</Link>
+                        <h1 className="text-sm text-muted">
+                            {" "}
+                            Already Have an Account?
+                        </h1>
+                        <Link className="text-sm" href="/login">
+                            Log in
+                        </Link>
                     </span>
-                    
-                    
+
+                    {error && <p className="text-sm text-red-600">{error}</p>}
+
+                    {success && (
+                        <p className="text-sm text-green-600">
+                            Account Has Been Created
+                        </p>
+                    )}
                 </CardContent>
 
                 <CardFooter>
@@ -65,7 +91,6 @@ export default function RegisterPage() {
                         Sign in
                     </Button>
                 </CardFooter>
-                
             </Card>
         </form>
     );

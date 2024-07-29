@@ -12,12 +12,15 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 
 const postDetailPage = async ({ params }) => {
     const postId = params.id;
     const post = await getPostById(postId)
-    console.log(post)
+    const session = await getServerSession(authOptions)
+
     return (
         <main className="w-full text-text flex flex-col gap-10 pb-10">
             <Breadcrumb>
@@ -33,7 +36,7 @@ const postDetailPage = async ({ params }) => {
             </Breadcrumb>
 
             <div className="flex flex-col gap-5">
-                <PostDetail post={post} />
+                <PostDetail post={post} currentUser={session.user}/>
                 <Separator />
                 <CommentColumn postId={post.id} comments={post.comments} />
             </div>

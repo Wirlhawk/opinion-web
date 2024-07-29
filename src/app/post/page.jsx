@@ -10,12 +10,14 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import SearchInput from "@/components/SearchInput";
 
 const PostPage = async () => {
-    const posts = await getPost()
+    const posts = await getPost();
 
     return (
         <main className="w-full text-text flex flex-col gap-10">
+            <SearchInput className="sm:hidden" />
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -23,7 +25,7 @@ const PostPage = async () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PostList  posts={posts}/>
+            <PostList posts={posts} />
         </main>
     );
 };

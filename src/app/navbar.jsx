@@ -4,6 +4,8 @@ import NavLink from "./../components/NavLink";
 import { House, MessageCircle, Compass, UserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Separator } from "@/components/ui/separator";
+import SearchInput from "@/components/SearchInput";
 
 const mainRoutes = [
     {
@@ -42,12 +44,13 @@ const Navbar = () => {
 
     return (
         <nav className="bg-secondary h-[5rem] px-10 flex border border-muted rounded-2xl mt-10 items-center justify-between">
-            <h1 className="font-bold text-text text-lg hidden sm:block">
-                Opinion
-            </h1>
+            <div className="flex items-center gap-10">
+                <h1 className="font-bold text-text text-lg hidden md:block ">
+                    Opinion
+                </h1>
+                <SearchInput className="hidden sm:block" />
+            </div>
 
-            {/* width: 100%;
-    justify-content: space-between; */}
             <div className="flex items-center gap-5 w-full justify-between sm:w-auto sm:justify-auto">
                 {mainRoutes.map((route, index) => (
                     <NavLink path={route.path} key={index}>

@@ -21,33 +21,33 @@ export default function LoginPage() {
     const router = useRouter()
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
+    const [error,setError] = useState("")
 
     const loginUser = async (e) => {
         e.preventDefault()
-        signIn("credentials", {
-            username,
-            password,
-            callbackUrl: "/",
-        });
+
+        try {
+            signIn("credentials", {
+                username,
+                password,
+                callbackUrl: "/",
+            });
+        } catch (e) {
+            setError(e);
+        }
 
         // router.push("/")
     }
 
     return (
-
-
         <form
             className="w-flex grid place-items-center h-screen"
             onSubmit={loginUser}
         >
             <Card className="w-full max-w-sm bg-background">
                 <CardHeader>
-                    <CardTitle className="text-2xl">
-                        Login
-                    </CardTitle>
-                    <CardDescription>
-                        Login to your account
-                    </CardDescription>
+                    <CardTitle className="text-2xl">Login</CardTitle>
+                    <CardDescription>Login to your account</CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">
                     <div className="grid gap-2">
@@ -76,9 +76,16 @@ export default function LoginPage() {
                     </div>
 
                     <span className="flex gap-2">
-                        <h1 className="text-sm text-muted"> Dont Have an Account?</h1>
-                        <Link className="text-sm" href="/register">Register</Link>
+                        <h1 className="text-sm text-muted">
+                            {" "}
+                            Dont Have an Account?
+                        </h1>
+                        <Link className="text-sm" href="/register">
+                            Register
+                        </Link>
                     </span>
+
+                    {error && <p className="text-sm text-red-600">{error}</p>}
 
                 </CardContent>
                 <CardFooter>

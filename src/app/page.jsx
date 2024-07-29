@@ -16,7 +16,7 @@ export default async function Home() {
                     Good Afternoon
                 </h2>
             </header>
-            <CreateNewPost/>
+            <CreateNewPost />
             
         </main>
     );

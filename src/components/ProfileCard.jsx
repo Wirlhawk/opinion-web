@@ -1,16 +1,17 @@
-import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Adjust the path as needed
+import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Adjust the path as needed
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
-import { Button } from "@/components/ui/button"
-import LogoutBtn from './LogoutBtn';
+import { Button } from "@/components/ui/button";
+import LogoutBtn from "./LogoutBtn";
 import Link from "next/link";
 
-
-
-const ProfileCard = ({user,postsCount,sessionUsername}) => {
-    const formattedDate = format(new Date(user.createdAt), "'Joined on' do 'of' MMMM yyyy");
-    const isOwner = ( user.username === sessionUsername ? true : false)
+const ProfileCard = ({ user, postsCount, sessionUsername }) => {
+    const formattedDate = format(
+        new Date(user.createdAt),
+        "'Joined on' do 'of' MMMM yyyy"
+    );
+    const isOwner = user.username === sessionUsername ? true : false;
 
     return (
         <div className="flex w-full">
@@ -23,7 +24,7 @@ const ProfileCard = ({user,postsCount,sessionUsername}) => {
                     </Avatar>
                     <h1 className="text-4xl font-bold">@{user.username}</h1>
 
-                    { isOwner && (
+                    {isOwner && (
                         <span className="sm:ml-auto mr-12 flex gap-2">
                             <Button asChild>
                                 <Link href="/profile/edit">Edit Profile</Link>
@@ -31,7 +32,6 @@ const ProfileCard = ({user,postsCount,sessionUsername}) => {
                             <LogoutBtn variant="outline" />
                         </span>
                     )}
-
                 </div>
                 {/* bio and misc */}
                 <div className="flex flex-col">
@@ -47,6 +47,6 @@ const ProfileCard = ({user,postsCount,sessionUsername}) => {
             </div>
         </div>
     );
-}
+};
 
-export default ProfileCard
+export default ProfileCard;

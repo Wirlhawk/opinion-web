@@ -1,16 +1,20 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { addPost } from '@/app/action'
 import SubmitBtn from './submit-btn';
 import { ImagePlus, X } from "lucide-react";
 import { useSession } from 'next-auth/react';
+import { useToast } from "@/components/ui/use-toast"
 
 
 const CreateNewPost = () => {
     const imageInputRef = useRef(null);
     const { data:session } = useSession()
     const [picturePreview, setPicturePreview] = useState(null);
+    const { toast } = useToast()
+    const formRef = useRef(null);
+
 
     const handlePictureChange = (e) => {
         const file = e.target.files[0];
@@ -29,11 +33,24 @@ const CreateNewPost = () => {
         }
     }
 
-    
 
     return (
         <div className="max-w-3xl bg-secondary border rounded-2xl p-10 ">
-            <form className="w-full " action={addPost}>
+            <form 
+                ref={formRef}
+                className="w-full " 
+                action={async (formData) => {
+                    const result = await addPost(formData)
+                    if (result?.success) {
+                        toast({
+                            description: result?.message
+                        });
+                    }
+                    if (formRef.current) {
+                        formRef.current.reset();
+                    }
+                }}
+            >
                 <div className="w-full flex gap-5">
                     <Avatar className="w-12 h-12 sm:w-16 sm:h-16 border border-muted font-md">
                         <AvatarImage src={session?.user?.picture} />

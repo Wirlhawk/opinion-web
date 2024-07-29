@@ -24,6 +24,7 @@ export const authOptions = {
                     return user;
                 } else {
                     throw new Error("Invalid credentials");
+                    return {error:"Invalid credentials"}
                 }
             },
         }),

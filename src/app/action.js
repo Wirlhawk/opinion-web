@@ -3,8 +3,9 @@ import { revalidatePath } from "next/cache";
 import prisma  from "@/lib/db"
 import { getServerSession } from 'next-auth'
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import { put } from "@vercel/blob";
+
 
 export async function addPost(formData) {
     const session = await getServerSession(authOptions);
@@ -33,8 +34,9 @@ export async function addPost(formData) {
 
     revalidatePath("/post")
     return { success: true, message: 'Post Has Been Created' };
-};
+}
 
+// Your existing getPost function
 export async function getPost() {
     const posts = await prisma.post.findMany({
         include: {
@@ -47,32 +49,36 @@ export async function getPost() {
     return posts;
 }
 
+
 export async function getPostById(id) {
     const post = await prisma.post.findUnique({
-    where: { 
-        id: id 
-    },
-    include: {
-      comments: {
+        where: { 
+            id: id 
+        },
         include: {
-          user: {
-            select: {
-              id: true,
-              username: true,
-              picture: true,
+            comments: {
+                orderBy: {
+                    createdAt: 'desc', // or 'desc' for descending order
+                },
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            username: true,
+                            picture: true,
+                        },
+                    },
+                },
             },
-          },
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    picture: true,
+                },
+            },
         },
-      },
-      user: {
-        select: {
-          id: true,
-          username: true,
-          picture: true,
-        },
-      },
-    },
-  });
+    });
     return post;
 }
 
@@ -92,6 +98,59 @@ export async function getPostByUser(username) {
     });
     return user;
 }
+
+export async function getPostByQuery(query) {
+    const posts = await prisma.post.findMany({
+        where: {
+            OR: [
+                {
+                    body: {
+                        contains: query,
+                        mode: "insensitive", 
+                    },
+                },
+                {
+                    user: {
+                        username: {
+                            contains: query,
+                            mode: "insensitive", 
+                        },
+                    },
+                },
+            ],
+        },
+        include: {
+            user: true,
+        },
+        orderBy: {
+            createdAt: "desc", 
+        },
+    });
+
+
+    return posts;
+}
+
+export async function deletePost(id) {
+    await prisma.$transaction(async (prisma) => {
+        await prisma.comment.deleteMany({
+            where: {
+                postId: id,
+            },
+        });
+
+        // Delete the post itself
+        await prisma.post.delete({
+            where: {
+                id,
+            },
+        });
+    });
+
+    revalidatePath("/post");
+    return { success: true, message:"post has been deleted" };
+}
+
 
 export async function addComment(formData,postId) {
     const session = await getServerSession(authOptions);
