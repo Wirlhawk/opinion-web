@@ -1,12 +1,12 @@
 "use server";
 
-import { SignJWT, jwtVerify } from "jose";
-import { NextRequest, NextResponse } from "next/server";
+// import { SignJWT, jwtVerify } from "jose";
+// import { NextRequest, NextResponse } from "next/server";
 import prisma from "./db";
 import bcrypt from "bcryptjs";
 
-const secretKey = "secret";
-const key = new TextEncoder().encode(secretKey);
+// const secretKey = "secret";
+// const key = new TextEncoder().encode(secretKey);
 
 // export async function encrypt(payload) {
 //     return await new SignJWT(payload)
