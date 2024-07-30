@@ -22,12 +22,11 @@ const QueryPostPage = async ({ params }) => {
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbPage>
-                                No Result for '{params.query}'
+                                No Result for &apos;{params.query}&apos;
                             </BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                
             </main>
         );
     }
@@ -38,7 +37,7 @@ const QueryPostPage = async ({ params }) => {
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbPage>
-                            Search Result for '{params.query}'
+                            Search Result for &apos;{params.query}&apos;
                         </BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
