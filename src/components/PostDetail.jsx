@@ -34,7 +34,7 @@ const PostDetail = async ({post,currentUser}) => {
                         @{post.user.username}
                     </Link>
                     <h2 className="text-md text-muted ">
-                        {post.user.bio || "no bio"}
+                        {post.user.bio }
                     </h2>
                 </span>
 
