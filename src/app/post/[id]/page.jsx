@@ -38,7 +38,7 @@ const postDetailPage = async ({ params }) => {
             <div className="flex flex-col gap-5">
                 <PostDetail post={post} currentUser={session.user}/>
                 <Separator />
-                <CommentColumn postId={post.id} comments={post.comments} />
+                <CommentColumn postId={post.id} comments={post.comments} currentUser={session.user} />
             </div>
         </main>
     );

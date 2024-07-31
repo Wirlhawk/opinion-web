@@ -2,6 +2,8 @@
 import React from 'react'
 import { useFormStatus } from "react-dom"
 import { Button } from './ui/button'
+import { LoaderCircle } from 'lucide-react';
+
 
 const SubmitBtn = ({ children }) => {
     const { pending } = useFormStatus();
@@ -12,7 +14,7 @@ const SubmitBtn = ({ children }) => {
             className="w-full font-bold mt-5"
             type="submit"
         >
-            {children}
+            { pending ? <LoaderCircle className="animate-spin"/> : children}
         </Button>
     );
 };

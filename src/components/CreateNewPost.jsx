@@ -103,7 +103,7 @@ const CreateNewPost = () => {
 
                     <label
                         htmlFor="input-image"
-                        className="pointer text-muted pt-4 pr-4"
+                        className="cursor-pointer text-muted pt-4 pr-4"
                     >
                         <ImagePlus />
                     </label>

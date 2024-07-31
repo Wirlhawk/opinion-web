@@ -30,7 +30,7 @@ export async function addPost(formData) {
             body: formData.get("body"),
             picture: imageUrl || null
         },
-    });
+    })
 
     revalidatePath("/post")
     return { success: true, message: 'Post Has Been Created' };
@@ -168,6 +168,17 @@ export async function addComment(formData,postId) {
 
     revalidatePath(`/post/${postId}`);
     return { succsess: true };
+}
+export async function deleteComment(commentId,postId) { 
+    await prisma.comment.delete({
+        where:{
+            id : commentId
+        }
+    })
+    revalidatePath(`/post/${postId}`);
+
+    return { success: true, message:"comment has been deleted" };
+
 }
 
 export const editProfile = async (formData) => {

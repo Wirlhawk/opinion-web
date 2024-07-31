@@ -15,12 +15,12 @@ const mainRoutes = [
     },
     {
         path: "/post",
-        icon: <MessageCircle size={24} color="white" />,
+        icon: <Compass size={24} color="white" />,
         requiresAuth: true,
     },
     {
         path: "/explore",
-        icon: <Compass size={24} color="white" />,
+        icon: <MessageCircle size={24} color="white" />,
         requiresAuth: true,
     },
     {
