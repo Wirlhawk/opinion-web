@@ -4,16 +4,15 @@ import { format } from "date-fns"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from 'next/link';
 import { Trash2 } from 'lucide-react';
-const formatDate = (isoDateString) => {
-    const date = new Date(isoDateString);
-    return format(date, "HH:mm | MMMM dd, yyyy");
-};
 import { Button } from './ui/button';
-
 import { deletePost } from '@/app/action';
 import { useRouter } from 'next/navigation';
 import { useToast } from "@/components/ui/use-toast";
 
+const formatDate = (isoDateString) => {
+    const date = new Date(isoDateString);
+    return format(date, "HH:mm | MMMM dd, yyyy");
+};
 
 const PostDetail = async ({post,currentUser}) => {
     const router = useRouter()
@@ -56,6 +55,8 @@ const PostDetail = async ({post,currentUser}) => {
                         <Trash2 color="#ffffff" />
                     </Button>
                 )}
+
+                
             </div>
             <p className="text-xl break-words">{post.body}</p>
 
@@ -68,6 +69,7 @@ const PostDetail = async ({post,currentUser}) => {
             <span className="text-md text-muted ">
                 {formatDate(post.createdAt)}
             </span>
+
         </div>
     );
 }
