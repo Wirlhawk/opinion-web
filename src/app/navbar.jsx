@@ -43,7 +43,10 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-secondary h-[5rem] px-10 flex border border-muted rounded-2xl mt-10 items-center justify-between">
+        <nav className="
+        fixed sm:static 
+        w-full left-0 bottom-0 rounded-[0px] border-top-muted 
+        z-10 bg-secondary h-[5rem] px-10 flex sm:border sm:border-muted sm:rounded-2xl mt-10 items-center justify-between">
             <div className="flex items-center gap-10">
                 <h1 className="font-bold text-text text-lg hidden md:block ">
                     Opinion

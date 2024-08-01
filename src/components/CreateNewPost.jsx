@@ -80,8 +80,8 @@ const CreateNewPost = () => {
                             />
                             
                             {picturePreview && (
-                                <div className="h-[250px] flex border-2 w-fit relative">
-                                    <img src={picturePreview}/>
+                                <div className="flex border-2 w-fit relative">
+                                    <img className="object-contain max-h-[250px]" src={picturePreview}/>
                                     <button 
                                         className="absolute right-3 top-3 bg-black/50 hover:bg-black/80 transition rounded-full p-1 "
                                         onClick={removePicture}

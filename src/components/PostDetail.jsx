@@ -77,8 +77,8 @@ const PostDetail = ({post,currentUser}) => {
             <p className="text-xl break-words">{post.body}</p>
 
             {post.picture && (
-                <div className="flex">
-                    <img className="rounded-lg h-96 " src={post.picture} />
+                <div className="">
+                    <img className="rounded-lg max-h-[250px]" src={post.picture} />
                 </div>
             )}
 

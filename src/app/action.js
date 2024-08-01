@@ -75,6 +75,7 @@ export async function getPostById(id) {
                     id: true,
                     username: true,
                     picture: true,
+                    bio:true,
                 },
             },
         },

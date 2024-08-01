@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
                 className={`${inter.className}  bg-background flex items-center flex-col `}
             >
                 <Provider>
-                    <div className="w-[80%] flex flex-col gap-10">
+                    <div className="w-[80%] flex flex-col-reverse sm:flex-col  gap-10 ">
                         <Navbar />
                         {children}
                         <Toaster />
