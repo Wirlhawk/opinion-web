@@ -7,7 +7,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const ProfilePage = async ({params}) => {
     const session = await getServerSession(authOptions);
-    const user = await getPostByUser(params.username)
+    const sanitizedUrl = encodeURIComponent(params.username);
+    const user = await getPostByUser(sanitizedUrl)
     const { posts } = user[0]
     const postsCount = posts.length
 
